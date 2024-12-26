@@ -8,4 +8,12 @@ package com.rock.dubbo.dubbo_spi_adaptive_expansion.bo;
  */
 public class Wheel {
 
+    //名称
+    private String name;
+
+    //初始化
+    public Wheel(String name) {
+        this.name = name;
+    }
+
 }
