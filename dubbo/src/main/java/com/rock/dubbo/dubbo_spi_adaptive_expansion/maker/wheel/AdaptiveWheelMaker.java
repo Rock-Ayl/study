@@ -18,7 +18,7 @@ public class AdaptiveWheelMaker implements WheelMaker {
     @Override
     public Wheel makeWheel(URL url) {
         // 1.从 URL 中获取 WheelMaker 名称
-        String wheelMakerName = getParameter(url, "Wheel.maker");
+        String wheelMakerName = getParameter(url, "wheel.maker");
         // 2.通过 SPI 加载具体的 WheelMaker
         WheelMaker wheelMaker = ExtensionLoader.getExtensionLoader(WheelMaker.class).getExtension(wheelMakerName);
         // 3.调用目标方法

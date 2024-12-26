@@ -1,2 +1,2 @@
-adaptive = com.rock.dubbo.dubbo_spi_adaptive_expansion.maker.wheel.AdaptiveWheelMaker
-michelin = com.rock.dubbo.dubbo_spi_adaptive_expansion.maker.wheel.MichelinWheelMaker
+AdaptiveWheelMaker = com.rock.dubbo.dubbo_spi_adaptive_expansion.maker.wheel.AdaptiveWheelMaker
+MichelinWheelMaker = com.rock.dubbo.dubbo_spi_adaptive_expansion.maker.wheel.MichelinWheelMaker
