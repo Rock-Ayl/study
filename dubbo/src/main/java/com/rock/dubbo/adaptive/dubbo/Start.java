@@ -19,6 +19,8 @@ public class Start {
         animal.eat(URL.valueOf("http://localhost:9999/xxx"));
         //匹配正确，加载cat
         animal.eat(URL.valueOf("http://localhost:9999/xxx?animalType=cat"));
+        //匹配另一个字段，加载cat
+        animal.eat(URL.valueOf("http://localhost:9999/xxx?animalType2=cat"));
 
     }
 

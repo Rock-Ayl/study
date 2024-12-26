@@ -20,7 +20,7 @@ public interface Animal {
      *
      * @param url
      */
-    @Adaptive({"animalType"})
+    @Adaptive({"animalType", "animalType2"})
     void eat(URL url);
 
 }
