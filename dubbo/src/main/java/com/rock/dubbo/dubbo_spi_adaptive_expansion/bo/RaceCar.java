@@ -1,4 +1,4 @@
-package com.rock.dubbo.dubbo_spi_adaptive_expansion;
+package com.rock.dubbo.dubbo_spi_adaptive_expansion.bo;
 
 /**
  * 赛车实体 ，继承汽车
@@ -14,6 +14,7 @@ public class RaceCar extends Car {
      * @param wheel
      */
     public RaceCar(Wheel wheel) {
+        //传给父类
         super(wheel);
     }
 

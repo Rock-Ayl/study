@@ -1,4 +1,9 @@
-package com.rock.dubbo.dubbo_spi_adaptive_expansion;
+package com.rock.dubbo.dubbo_spi_adaptive_expansion.maker.car;
+
+import com.rock.dubbo.dubbo_spi_adaptive_expansion.bo.Car;
+import com.rock.dubbo.dubbo_spi_adaptive_expansion.bo.RaceCar;
+import com.rock.dubbo.dubbo_spi_adaptive_expansion.bo.Wheel;
+import com.rock.dubbo.dubbo_spi_adaptive_expansion.maker.wheel.WheelMaker;
 
 import java.net.URL;
 
@@ -20,7 +25,7 @@ public class RaceCarMaker implements CarMaker {
 
     public Car makeCar(URL url) {
         //初始化一个轮子
-        Wheel wheel = wheelMaker.makeWheel(url);
+        Wheel wheel = this.wheelMaker.makeWheel(url);
         //初始化赛车
         return new RaceCar(wheel);
     }

@@ -1,4 +1,4 @@
-package com.rock.dubbo.dubbo_spi_adaptive_expansion;
+package com.rock.dubbo.dubbo_spi_adaptive_expansion.bo;
 
 /**
  * 汽车实体

@@ -1,4 +1,4 @@
-package com.rock.dubbo.dubbo_spi_adaptive_expansion;
+package com.rock.dubbo.dubbo_spi_adaptive_expansion.bo;
 
 /**
  * 车轮实体
@@ -7,4 +7,5 @@ package com.rock.dubbo.dubbo_spi_adaptive_expansion;
  * @Date 2024-12-26
  */
 public class Wheel {
+
 }

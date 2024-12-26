@@ -1,4 +1,6 @@
-package com.rock.dubbo.dubbo_spi_adaptive_expansion;
+package com.rock.dubbo.dubbo_spi_adaptive_expansion.maker.car;
+
+import com.rock.dubbo.dubbo_spi_adaptive_expansion.bo.Car;
 
 import java.net.URL;
 
