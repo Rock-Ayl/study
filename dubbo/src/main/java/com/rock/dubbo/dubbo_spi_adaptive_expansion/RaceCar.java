@@ -1,23 +1,20 @@
 package com.rock.dubbo.dubbo_spi_adaptive_expansion;
 
 /**
- * 汽车实体
+ * 赛车实体 ，继承汽车
  *
  * @Author ayl
  * @Date 2024-12-26
  */
-public class Car {
-
-    //车需要轮子对象
-    private Wheel wheel;
+public class RaceCar extends Car {
 
     /**
      * 初始化汽车
      *
      * @param wheel
      */
-    public Car(Wheel wheel) {
-        this.wheel = wheel;
+    public RaceCar(Wheel wheel) {
+        super(wheel);
     }
 
 }

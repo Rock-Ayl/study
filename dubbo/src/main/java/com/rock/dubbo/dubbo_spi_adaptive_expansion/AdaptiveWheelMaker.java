@@ -7,6 +7,7 @@ import java.net.URLDecoder;
 
 /**
  * 自适应 制作车轮 实现类
+ * 本质：一个代理类,通过 SPI 实现代理效果.
  *
  * @Author ayl
  * @Date 2024-12-26

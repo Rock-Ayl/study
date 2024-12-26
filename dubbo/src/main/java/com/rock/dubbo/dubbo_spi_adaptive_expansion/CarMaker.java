@@ -1,0 +1,21 @@
+package com.rock.dubbo.dubbo_spi_adaptive_expansion;
+
+import java.net.URL;
+
+/**
+ * 制造汽车 接口
+ *
+ * @Author ayl
+ * @Date 2024-12-26
+ */
+public interface CarMaker {
+
+    /**
+     * 制造汽车
+     *
+     * @param url
+     * @return
+     */
+    Car makeCar(URL url);
+
+}
