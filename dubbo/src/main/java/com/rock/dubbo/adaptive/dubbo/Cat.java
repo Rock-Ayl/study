@@ -1,6 +1,6 @@
 package com.rock.dubbo.adaptive.dubbo;
 
-import java.net.URL;
+import org.apache.dubbo.common.URL;
 
 /**
  * 实现 猫
