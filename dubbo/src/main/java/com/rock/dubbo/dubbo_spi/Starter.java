@@ -19,6 +19,10 @@ public class Starter {
         //实现
         extensionLoader.getExtension("dubboSpiKey1").hello();
         extensionLoader.getExtension("dubboSpiKey2").hello();
+        //再度实现，发现时间是一样，说明用的是缓存的实例
+        extensionLoader.getExtension("dubboSpiKey1").hello();
+        extensionLoader.getExtension("dubboSpiKey1").hello();
+        extensionLoader.getExtension("dubboSpiKey1").hello();
 
     }
 
