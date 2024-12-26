@@ -5,7 +5,7 @@ import org.apache.dubbo.common.extension.SPI;
 /**
  * dubbo SPI 服务定义
  */
-//这个注解是 dubbo spi 的 服务层必要的朱姐
+//这个注解是 dubbo spi 的 服务层必要的注解
 @SPI
 public interface Service {
 
