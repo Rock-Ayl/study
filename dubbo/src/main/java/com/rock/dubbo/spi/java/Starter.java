@@ -1,4 +1,4 @@
-package com.rock.dubbo.java_spi;
+package com.rock.dubbo.spi.java;
 
 import java.util.ServiceLoader;
 

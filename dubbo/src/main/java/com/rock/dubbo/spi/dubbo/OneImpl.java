@@ -1,4 +1,4 @@
-package com.rock.dubbo.dubbo_spi;
+package com.rock.dubbo.spi.dubbo;
 
 /**
  * dubbo SPI 实现1

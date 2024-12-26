@@ -1,0 +1,2 @@
+dubboSpiKey1 = com.rock.dubbo.spi.dubbo.OneImpl
+dubboSpiKey2 = com.rock.dubbo.spi.dubbo.TwoImpl

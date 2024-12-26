@@ -1,4 +1,4 @@
-package com.rock.dubbo.java_spi;
+package com.rock.dubbo.spi.java;
 
 /**
  * Java SPI 服务定义
