@@ -1,5 +1,6 @@
 package com.rock.dubbo.dubbo_spi_adaptive_expansion;
 
+import com.rock.dubbo.dubbo_spi_adaptive_expansion.bo.Wheel;
 import com.rock.dubbo.dubbo_spi_adaptive_expansion.maker.car.CarMaker;
 import com.rock.dubbo.dubbo_spi_adaptive_expansion.maker.wheel.WheelMaker;
 import org.apache.dubbo.common.extension.ExtensionLoader;
@@ -24,10 +25,17 @@ public class Start {
         ExtensionLoader<WheelMaker> wheelMakerExtensionLoader = ExtensionLoader.getExtensionLoader(WheelMaker.class);
         ExtensionLoader<CarMaker> carMakerExtensionLoader = ExtensionLoader.getExtensionLoader(CarMaker.class);
 
-        //获取实例代理实例
+        //获取代理食堂里
         WheelMaker adaptive = wheelMakerExtensionLoader.getExtension("AdaptiveWheelMaker");
+        //获取赛车实例
+        CarMaker carMaker = carMakerExtensionLoader.getExtension("RaceCarMaker");
+
         //通过代理创建轮胎
-        System.out.println(adaptive.makeWheel(url));
+        Wheel wheel = adaptive.makeWheel(url);
+        System.out.println(wheel);
+
+        //todo 制造赛车,暂时没有注入 setWheelMaker
+        carMaker.makeCar(url);
 
     }
 
