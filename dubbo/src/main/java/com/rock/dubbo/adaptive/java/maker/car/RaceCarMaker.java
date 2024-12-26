@@ -1,9 +1,9 @@
-package com.rock.dubbo.dubbo_spi_adaptive_expansion.maker.car;
+package com.rock.dubbo.adaptive.java.maker.car;
 
-import com.rock.dubbo.dubbo_spi_adaptive_expansion.bo.Car;
-import com.rock.dubbo.dubbo_spi_adaptive_expansion.bo.RaceCar;
-import com.rock.dubbo.dubbo_spi_adaptive_expansion.bo.Wheel;
-import com.rock.dubbo.dubbo_spi_adaptive_expansion.maker.wheel.WheelMaker;
+import com.rock.dubbo.adaptive.java.bo.Car;
+import com.rock.dubbo.adaptive.java.bo.RaceCar;
+import com.rock.dubbo.adaptive.java.bo.Wheel;
+import com.rock.dubbo.adaptive.java.maker.wheel.WheelMaker;
 
 import java.net.URL;
 

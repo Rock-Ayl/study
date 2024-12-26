@@ -1,0 +1,2 @@
+AdaptiveWheelMaker = com.rock.dubbo.adaptive.java.maker.wheel.AdaptiveWheelMaker
+MichelinWheelMaker = com.rock.dubbo.adaptive.java.maker.wheel.MichelinWheelMaker

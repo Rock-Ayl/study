@@ -1,4 +1,4 @@
-package com.rock.dubbo.dubbo_spi_adaptive_expansion.bo;
+package com.rock.dubbo.adaptive.java.bo;
 
 /**
  * 赛车实体 ，继承汽车

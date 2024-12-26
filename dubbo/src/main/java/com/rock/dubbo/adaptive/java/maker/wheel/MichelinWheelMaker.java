@@ -1,6 +1,6 @@
-package com.rock.dubbo.dubbo_spi_adaptive_expansion.maker.wheel;
+package com.rock.dubbo.adaptive.java.maker.wheel;
 
-import com.rock.dubbo.dubbo_spi_adaptive_expansion.bo.Wheel;
+import com.rock.dubbo.adaptive.java.bo.Wheel;
 
 import java.net.URL;
 

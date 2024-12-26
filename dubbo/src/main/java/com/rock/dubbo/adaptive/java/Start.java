@@ -1,8 +1,7 @@
-package com.rock.dubbo.dubbo_spi_adaptive_expansion;
+package com.rock.dubbo.adaptive.java;
 
-import com.rock.dubbo.dubbo_spi_adaptive_expansion.bo.Wheel;
-import com.rock.dubbo.dubbo_spi_adaptive_expansion.maker.car.CarMaker;
-import com.rock.dubbo.dubbo_spi_adaptive_expansion.maker.wheel.WheelMaker;
+import com.rock.dubbo.adaptive.java.bo.Wheel;
+import com.rock.dubbo.adaptive.java.maker.wheel.WheelMaker;
 import org.apache.dubbo.common.extension.ExtensionLoader;
 
 import java.net.MalformedURLException;
@@ -23,19 +22,18 @@ public class Start {
 
         //载入
         ExtensionLoader<WheelMaker> wheelMakerExtensionLoader = ExtensionLoader.getExtensionLoader(WheelMaker.class);
-        ExtensionLoader<CarMaker> carMakerExtensionLoader = ExtensionLoader.getExtensionLoader(CarMaker.class);
-
-        //获取代理食堂里
+        //获取代理
         WheelMaker adaptive = wheelMakerExtensionLoader.getExtension("AdaptiveWheelMaker");
-        //获取赛车实例
-        CarMaker carMaker = carMakerExtensionLoader.getExtension("RaceCarMaker");
-
         //通过代理创建轮胎
         Wheel wheel = adaptive.makeWheel(url);
+        //输出
         System.out.println(wheel);
 
         //todo 制造赛车,暂时没有注入 setWheelMaker
-        carMaker.makeCar(url);
+        //ExtensionLoader<CarMaker> carMakerExtensionLoader = ExtensionLoader.getExtensionLoader(CarMaker.class);
+        //获取赛车实例
+        //CarMaker carMaker = carMakerExtensionLoader.getExtension("RaceCarMaker");
+        //carMaker.makeCar(url);
 
     }
 
