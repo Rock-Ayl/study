@@ -1,9 +1,8 @@
 package com.rock.dubbo.adaptive.java.maker.wheel;
 
 import com.rock.dubbo.adaptive.java.bo.Wheel;
+import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.SPI;
-
-import java.net.URL;
 
 /**
  * 制作车轮 定义接口

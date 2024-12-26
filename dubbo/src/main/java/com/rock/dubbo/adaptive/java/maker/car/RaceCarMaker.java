@@ -4,8 +4,7 @@ import com.rock.dubbo.adaptive.java.bo.Car;
 import com.rock.dubbo.adaptive.java.bo.RaceCar;
 import com.rock.dubbo.adaptive.java.bo.Wheel;
 import com.rock.dubbo.adaptive.java.maker.wheel.WheelMaker;
-
-import java.net.URL;
+import org.apache.dubbo.common.URL;
 
 /**
  * 制造赛车 实现

@@ -3,10 +3,8 @@ package com.rock.dubbo.adaptive.java;
 import com.rock.dubbo.adaptive.java.bo.Wheel;
 import com.rock.dubbo.adaptive.java.maker.car.CarMaker;
 import com.rock.dubbo.adaptive.java.maker.wheel.WheelMaker;
+import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.ExtensionLoader;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * 启动
@@ -16,10 +14,10 @@ import java.net.URL;
  */
 public class Start {
 
-    public static void main(String[] args) throws MalformedURLException {
+    public static void main(String[] args) {
 
         //模拟url
-        URL url = new URL("http://192.168.0.101:20880/XxxService?wheel.maker=MichelinWheelMaker");
+        URL url = URL.valueOf("http://192.168.0.101:20880/XxxService?wheel.maker=MichelinWheelMaker");
 
         /**
          * 代理 spi

@@ -1,8 +1,7 @@
 package com.rock.dubbo.adaptive.java.maker.wheel;
 
 import com.rock.dubbo.adaptive.java.bo.Wheel;
-
-import java.net.URL;
+import org.apache.dubbo.common.URL;
 
 /**
  * @Author ayl

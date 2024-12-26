@@ -1,9 +1,8 @@
 package com.rock.dubbo.adaptive.java.maker.car;
 
 import com.rock.dubbo.adaptive.java.bo.Car;
+import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.SPI;
-
-import java.net.URL;
 
 /**
  * 制造汽车 接口
