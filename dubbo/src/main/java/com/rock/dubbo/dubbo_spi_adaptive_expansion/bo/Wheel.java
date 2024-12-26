@@ -16,4 +16,9 @@ public class Wheel {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return String.format("name=%s", this.name);
+    }
+
 }
