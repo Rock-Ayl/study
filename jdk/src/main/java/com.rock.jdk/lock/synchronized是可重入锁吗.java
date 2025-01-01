@@ -1,4 +1,4 @@
-package com.rock.dubbo.lock;
+package com.rock.jdk.lock;
 
 /**
  * synchronized 是可重入锁吗？

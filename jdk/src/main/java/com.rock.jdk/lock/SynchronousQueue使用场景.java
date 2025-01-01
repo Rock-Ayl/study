@@ -1,4 +1,4 @@
-package com.rock.dubbo.lock;
+package com.rock.jdk.lock;
 
 import java.util.concurrent.SynchronousQueue;
 
