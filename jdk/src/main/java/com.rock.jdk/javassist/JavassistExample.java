@@ -29,12 +29,15 @@ public class JavassistExample {
          * cc.writeFile("javassist/out");
          */
 
-        //加载并实例化动态生成的类
-        Class<?> dynamicClass = cc.toClass();
-        Object instance = dynamicClass.getDeclaredConstructor().newInstance();
-        //调用动态方法
-        String result = (String) dynamicClass
+        //加载类
+        Class<?> clazz = cc.toClass();
+        //反射-初始化势力
+        Object instance = clazz.getDeclaredConstructor().newInstance();
+        //反射-调用实例方法
+        String result = (String) clazz
+                //指定方法、参数类型
                 .getMethod("sayHello", String.class)
+                //调用方法、传入参数
                 .invoke(instance, "World");
 
         //输出 "Hello, World"
