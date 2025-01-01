@@ -5,6 +5,8 @@ import javassist.CtClass;
 import javassist.CtMethod;
 
 /**
+ * javassist 拼接一个类,通过反射初始化实例、调用方法
+ *
  * @Author ayl
  * @Date 2025-01-01
  */
@@ -44,6 +46,10 @@ public class JavassistExample {
                 .getMethod("sayHello", String.class)
                 //调用方法、传入参数
                 .invoke(instance, "World");
+
+        /**
+         * 获取最终结果
+         */
 
         //输出 "Hello, World"
         System.out.println(result);
