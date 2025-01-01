@@ -25,4 +25,16 @@
         </plugins>
     </build>
 
+    <dependencies>
+
+        <!-- javassist -->
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.29.2-GA</version>
+            <scope>compile</scope>
+        </dependency>
+
+    </dependencies>
+
 </project>
