@@ -26,7 +26,7 @@ public class JavassistExample {
         cc.addMethod(method);
 
         /**
-         * 如果有需要,将类写入指定目录
+         * 如果有需要,将类写入指定目录(是.class文件,而非.java)
          * cc.writeFile("javassist/out");
          */
 
