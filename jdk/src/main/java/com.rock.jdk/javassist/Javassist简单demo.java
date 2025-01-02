@@ -10,7 +10,7 @@ import javassist.CtMethod;
  * @Author ayl
  * @Date 2025-01-01
  */
-public class JavassistExample {
+public class Javassist简单demo {
 
     public static void main(String[] args) throws Exception {
 
