@@ -9,7 +9,7 @@ import java.util.concurrent.SynchronousQueue;
  * @Author ayl
  * @Date 2024-12-21
  */
-public class SynchronousQueue使用场景 {
+public class SynchronousQueue_使用场景 {
 
     public static void main(String[] args) {
 

@@ -7,7 +7,7 @@ package com.rock.jdk.lock;
  * @Author ayl
  * @Date 2024-12-21
  */
-public class synchronized是可重入锁吗 {
+public class synchronized_是可重入锁吗 {
 
     public synchronized void method1() {
         System.out.println("Inside method1");
@@ -20,7 +20,7 @@ public class synchronized是可重入锁吗 {
     }
 
     public static void main(String[] args) {
-        synchronized是可重入锁吗 example = new synchronized是可重入锁吗();
+        synchronized_是可重入锁吗 example = new synchronized_是可重入锁吗();
         example.method1();
     }
 
