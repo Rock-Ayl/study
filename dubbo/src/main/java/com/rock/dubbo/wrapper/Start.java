@@ -17,7 +17,7 @@ public class Start {
         URL url = URL.valueOf("http://192.168.0.101:20880/");
 
         /**
-         * 代理 spi 自适配扩展 + wrapper
+         * 代理 spi 自适配扩展 + wrapper(包装类/AOP)
          *
          * 结果：自适配扩展会先执行拦截器、按照文件内部依次执行、最后执行真实实现
          */
