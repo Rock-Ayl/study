@@ -1,0 +1,3 @@
+wTest=com.rock.dubbo.wrapper.RealWTest
+wrapper1=com.rock.dubbo.wrapper.WTest1Wrapper
+wrapper2=com.rock.dubbo.wrapper.WTest2Wrapper
