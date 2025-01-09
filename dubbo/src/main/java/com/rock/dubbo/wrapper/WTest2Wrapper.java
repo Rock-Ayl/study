@@ -1,6 +1,7 @@
 package com.rock.dubbo.wrapper;
 
 import org.apache.dubbo.common.URL;
+import org.apache.dubbo.common.extension.ExtensionLoader;
 
 /**
  * 拦截器 2
@@ -10,8 +11,14 @@ import org.apache.dubbo.common.URL;
  */
 public class WTest2Wrapper implements WTest {
 
+    //包装传递链
     private final WTest wTest;
 
+    /**
+     * {@link ExtensionLoader} .isWrapperClass 会通过判断是否有该构造函数,判断其是否为包装类,并进行传递
+     *
+     * @param wTest
+     */
     public WTest2Wrapper(WTest wTest) {
         this.wTest = wTest;
     }
