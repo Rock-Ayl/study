@@ -101,7 +101,7 @@ public class AC自动机_过滤敏感词_简单实现 {
         filter.addSensitiveWord("香蕉");
 
         //过滤敏感词
-        System.out.println(filter.filterSensitiveWords("猪头你是不是苹果我不是香蕉", '*'));
+        System.out.println(filter.filterSensitiveWords("猪头,你是不是苹果,我不是香蕉.", '*'));
 
     }
 
