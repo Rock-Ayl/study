@@ -1,4 +1,4 @@
-package com.rock.jdk.lock;
+package com.rock.jdk.concurrent.lock;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.StampedLock;
