@@ -26,10 +26,10 @@ public class Producer implements Runnable {
     @Override
     public void run() {
         //循环
-        for (int i = 0; i < 10; i++) {
+        for (; ; ) {
             try {
                 //生产
-                this.warehouse.put(i);
+                this.warehouse.put();
                 //等待
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
