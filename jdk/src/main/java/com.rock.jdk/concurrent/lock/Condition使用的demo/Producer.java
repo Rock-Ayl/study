@@ -25,13 +25,17 @@ public class Producer implements Runnable {
      */
     @Override
     public void run() {
+        //循环
         for (int i = 0; i < 10; i++) {
             try {
-                warehouse.put(i);
-                Thread.sleep(1000); // 模拟生产过程
+                //生产
+                this.warehouse.put(i);
+                //等待
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
+                //当前线程打上 中断标记
                 Thread.currentThread().interrupt();
-                System.out.println("Producer interrupted");
+                System.out.println("生产者-已经打上中断标记");
             }
         }
     }

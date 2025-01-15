@@ -26,13 +26,17 @@ public class Consumer implements Runnable {
      */
     @Override
     public void run() {
+        //循环
         for (int i = 0; i < 10; i++) {
             try {
+                //消费
                 warehouse.take();
-                Thread.sleep(1500); // 模拟消费过程
+                //等待
+                Thread.sleep(1500);
             } catch (InterruptedException e) {
+                //当前线程打上 中断标记
                 Thread.currentThread().interrupt();
-                System.out.println("Consumer interrupted");
+                System.out.println("消费者-已经打上中断标记");
             }
         }
     }
