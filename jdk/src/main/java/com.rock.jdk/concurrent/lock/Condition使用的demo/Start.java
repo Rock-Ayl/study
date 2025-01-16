@@ -15,21 +15,64 @@ public class Start {
 
     public synchronized static void main(String[] args) {
 
+        /**
+         * 统一仓库
+         */
+
         //创建仓库
         Warehouse warehouse = new Warehouse(5);
 
         /**
-         * 创建 生产者、消费者列表
+         * 创建 生产者
          */
 
         //初始化生产者
-        Thread producerThread = new Thread(new Producer(warehouse), "生产者");
+        Thread producerThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //循环
+                for (; ; ) {
+                    try {
+                        //生产
+                        warehouse.put();
+                        //等待
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        //当前线程打上 中断标记
+                        Thread.currentThread().interrupt();
+                        System.out.println("生产者-已经打上中断标记");
+                    }
+                }
+            }
+        }, "生产者");
+
+        /**
+         * 创建 消费者 列表
+         */
+
         //初始化消费者列表
         List<Thread> consumerThreadList = new ArrayList<>();
         //循环
         for (int i = 0; i < 10; i++) {
             //初始化消费者
-            Thread consumerThread = new Thread(new Consumer(warehouse), "消费者-" + i);
+            Thread consumerThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //循环
+                    for (int i = 0; i < 10; i++) {
+                        try {
+                            //消费
+                            warehouse.take();
+                            //等待
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            //当前线程打上 中断标记
+                            Thread.currentThread().interrupt();
+                            System.out.println("消费者-已经打上中断标记");
+                        }
+                    }
+                }
+            }, "消费者-" + i);
             //加入队列
             consumerThreadList.add(consumerThread);
         }
