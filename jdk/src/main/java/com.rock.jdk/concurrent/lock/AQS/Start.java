@@ -1,6 +1,6 @@
 package com.rock.jdk.concurrent.lock.AQS;
 
-import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * 测试锁
@@ -13,8 +13,8 @@ public class Start {
     //初始化 简单的锁
     private static MyEasyLock myEasyLock = new MyEasyLock();
 
-    //循环篱栅,数量=31
-    private static CyclicBarrier barrier = new CyclicBarrier(31);
+    //计数器
+    private static CountDownLatch countDownLatch = new CountDownLatch(30);
 
     //数字
     private static int sum = 0;
@@ -43,16 +43,16 @@ public class Start {
                         unsafeIncr();
                     }
                     try {
-                        //-1,等待其他线程结束
-                        barrier.await();
+                        //-1
+                        countDownLatch.countDown();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }).start();
         }
-        //-1,等待其他线程结束
-        barrier.await();
+        //等待所有计数器结束
+        countDownLatch.await();
         //输出结果
         System.out.println("加锁前，sum=" + sum);
 
@@ -61,7 +61,7 @@ public class Start {
          */
 
         //重置
-        barrier.reset();
+        countDownLatch = new CountDownLatch(30);
         //重置和
         sum = 0;
 
@@ -81,16 +81,16 @@ public class Start {
                         safeIncr();
                     }
                     try {
-                        //-1,等待其他线程结束
-                        barrier.await();
+                        //-1
+                        countDownLatch.countDown();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }).start();
         }
-        //-1,等待其他线程结束
-        barrier.await();
+        //等待其他线程结束
+        countDownLatch.await();
         //输出结果
         System.out.println("加锁后，sum=" + sum);
 
