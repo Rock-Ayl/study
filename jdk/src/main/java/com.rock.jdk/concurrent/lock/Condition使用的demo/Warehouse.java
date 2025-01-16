@@ -49,8 +49,8 @@ public class Warehouse {
             }
             //添加库存、输出
             System.out.println(String.format("线程[%s]存入库存，当前库存数量=%s", Thread.currentThread().getName(), ++this.size));
-            //通知消费者
-            this.notEmpty.signal();
+            //通知所有消费者
+            this.notEmpty.signalAll();
         } finally {
             //释放锁
             this.lock.unlock();
@@ -66,11 +66,15 @@ public class Warehouse {
         try {
             //获取全局锁
             this.lock.lock();
-            //如果仓库为空,等待直到有物品可用
+
+            /**
+             * 如果仓库为空,等待直到有物品可用,必须是if,因为后面还有多个被唤醒的其他消费者在排队
+             */
             while (this.size == 0) {
                 //等待
                 this.notEmpty.await();
             }
+
             //扣减库存、输出
             System.out.println(String.format("线程[%s]扣减库存，当前库存数量=%s", Thread.currentThread().getName(), --this.size));
         } finally {
