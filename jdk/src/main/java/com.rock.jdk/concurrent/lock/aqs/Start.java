@@ -31,49 +31,67 @@ public class Start {
          * 未加锁 实现
          */
 
-        //未加锁前
+        //循环
         for (int i = 0; i < 30; i++) {
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    for (int i = 0; i < 10000; i++) {
-                        increment1();//没有同步措施的a++；
-                    }
-                    try {
-                        barrier.await();//等30个线程累加完毕
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            t.start();
-        }
-        barrier.await();
-        System.out.println("加锁前，sum=" + sum);
-
-        /**
-         * 加锁 实现
-         */
-
-        //加锁后
-        barrier.reset();//重置CyclicBarrier
-        sum = 0;
-        for (int i = 0; i < 30; i++) {
+            //初始化线程、启动
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    //循环1万次
                     for (int i = 0; i < 10000; i++) {
-                        increment2();//a++采用Mutex进行同步处理
+                        //不安全+1
+                        increment1();
                     }
                     try {
-                        barrier.await();//等30个线程累加完毕
+                        //-1,等待其他线程结束
+                        barrier.await();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }).start();
         }
+        //-1,等待其他线程结束
         barrier.await();
+        //输出结果
+        System.out.println("加锁前，sum=" + sum);
+
+        /**
+         * 重置
+         */
+
+        //重置
+        barrier.reset();
+        //重置和
+        sum = 0;
+
+        /**
+         * 加锁 实现
+         */
+
+        //循环
+        for (int i = 0; i < 30; i++) {
+            //初始化线程、启动
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //循环1万次
+                    for (int i = 0; i < 10000; i++) {
+                        //安全+1
+                        increment2();
+                    }
+                    try {
+                        //-1,等待其他线程结束
+                        barrier.await();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+        //-1,等待其他线程结束
+        barrier.await();
+        //输出结果
         System.out.println("加锁后，sum=" + sum);
     }
 
