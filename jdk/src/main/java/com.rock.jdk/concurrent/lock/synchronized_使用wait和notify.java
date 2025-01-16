@@ -1,9 +1,6 @@
 package com.rock.jdk.concurrent.lock;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * synchronized_使用 wait 和 notify
@@ -40,7 +37,11 @@ public class synchronized_使用wait和notify {
          * @throws InterruptedException
          */
         private synchronized String getTask() throws InterruptedException {
-            //如果为空
+
+            /**
+             * 这里必须是 while 而不是 if
+             * 一个 notifyAll 会唤醒所有线程,但是只有一个库存,剩下的必须重新判断并继续等待
+             */
             while (queue.isEmpty()) {
                 //等待
                 this.wait();
@@ -58,41 +59,61 @@ public class synchronized_使用wait和notify {
         //线程列表
         List<Thread> threadList = new ArrayList<>();
 
+        /**
+         * 生成 消费者线程 列表
+         */
+
+        //循环
         for (int i = 0; i < 5; i++) {
-            Thread thread = new Thread() {
+            //初始化消费者线程
+            Thread thread = new Thread(Integer.toString(i)) {
                 public void run() {
-                    // 执行task:
+                    //死循环
                     while (true) {
                         try {
-                            String s = task.getTask();
-                            System.out.println("execute task: " + s);
+                            //获取name
+                            String taskName = task.getTask();
+                            //输出
+                            System.out.println(String.format("线程[%s]->消费[%s]", Thread.currentThread().getName(), taskName));
+                            try {
+                                Thread.sleep(2500);
+                            } catch (InterruptedException e) {
+                            }
                         } catch (InterruptedException e) {
                             return;
                         }
                     }
                 }
             };
+            //启动
             thread.start();
+            //加入列表
             threadList.add(thread);
         }
-        var add = new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
-                // 放入task:
-                String s = "t-" + Math.random();
-                System.out.println("add task: " + s);
-                task.addTask(s);
+
+        /**
+         * 生成 生产者
+         */
+
+        //初始化生产者
+        Thread add = new Thread(() -> {
+            //循环
+            for (int i = 0; i < 100; i++) {
+                //放入task:
+                String taskName = "任务-" + new Random().nextInt(100);
+                //输出
+                System.out.println(String.format("线程[%s]->增加[%s]", Thread.currentThread().getName(), taskName));
+                //增加任务
+                task.addTask(taskName);
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                 }
             }
         });
+        add.setName("生产者");
         add.start();
-        add.join();
-        Thread.sleep(100);
-        for (var t : threadList) {
-            t.interrupt();
-        }
+
     }
 
 }
