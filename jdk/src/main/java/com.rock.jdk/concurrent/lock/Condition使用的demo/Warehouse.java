@@ -20,8 +20,7 @@ public class Warehouse {
     //全局锁
     private final Lock lock = new ReentrantLock(true);
 
-    //条件组
-    private final Condition notFull = this.lock.newCondition();
+    //条件
     private final Condition notEmpty = this.lock.newCondition();
 
     /**
@@ -43,14 +42,14 @@ public class Warehouse {
         try {
             //获取全局锁
             this.lock.lock();
-            //如果仓库已满,等待直到有空间可用
+            //如果仓库满了,过
             if (this.size == this.maxSize) {
-                //?
-                this.notFull.await();
+                //过
+                return;
             }
             //添加库存、输出
-            System.out.println(String.format("存入库存，当前库存数量=%s", ++this.size));
-            //?
+            System.out.println(String.format("线程[%s]存入库存，当前库存数量=%s", Thread.currentThread().getName(), ++this.size));
+            //通知消费者
             this.notEmpty.signal();
         } finally {
             //释放锁
@@ -68,14 +67,12 @@ public class Warehouse {
             //获取全局锁
             this.lock.lock();
             //如果仓库为空,等待直到有物品可用
-            if (this.size == 0) {
-                //?
+            while (this.size == 0) {
+                //等待
                 this.notEmpty.await();
             }
             //扣减库存、输出
-            System.out.println(String.format("扣减库存，当前库存数量=%s", --this.size));
-            //?
-            this.notFull.signal();
+            System.out.println(String.format("线程[%s]扣减库存，当前库存数量=%s", Thread.currentThread().getName(), --this.size));
         } finally {
             //释放锁
             this.lock.unlock();

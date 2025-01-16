@@ -1,7 +1,5 @@
 package com.rock.jdk.concurrent.lock.Condition使用的demo;
 
-import java.util.Random;
-
 /**
  * 消费者
  *
@@ -33,8 +31,8 @@ public class Consumer implements Runnable {
             try {
                 //消费
                 warehouse.take();
-                //随机等待时间
-                Thread.sleep(new Random().nextInt(2000));
+                //等待
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 //当前线程打上 中断标记
                 Thread.currentThread().interrupt();
