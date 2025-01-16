@@ -3,10 +3,12 @@ package com.rock.jdk.concurrent.lock.aqs;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 /**
+ * AQS 实现一个简单的锁
+ *
  * @Author ayl
  * @Date 2025-01-16
  */
-public class Mutex {
+public class MyEasyLock {
 
     /**
      * 实现AQS

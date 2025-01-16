@@ -3,28 +3,34 @@ package com.rock.jdk.concurrent.lock.aqs;
 import java.util.concurrent.CyclicBarrier;
 
 /**
+ * 测试锁
+ *
  * @Author ayl
  * @Date 2025-01-16
  */
-public class TestMutex {
+public class Start {
 
-    //初始化 Mutex
-    private static Mutex mutex = new Mutex();
+    //初始化 简单的锁
+    private static MyEasyLock myEasyLock = new MyEasyLock();
 
     //循环篱栅,数量=31
     private static CyclicBarrier barrier = new CyclicBarrier(31);
 
     //数字
-    private static int number = 0;
+    private static int sum = 0;
 
     /**
-     * 执行
+     * 目的：启用30个线程，每个线程+10000次,同步正常的话,最终结果应为300000
      *
      * @param args
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        //说明:我们启用30个线程，每个线程对i自加10000次，同步正常的话，最终结果应为300000；
+
+        /**
+         * 未加锁 实现
+         */
+
         //未加锁前
         for (int i = 0; i < 30; i++) {
             Thread t = new Thread(new Runnable() {
@@ -43,11 +49,15 @@ public class TestMutex {
             t.start();
         }
         barrier.await();
-        System.out.println("加锁前，number=" + number);
+        System.out.println("加锁前，sum=" + sum);
+
+        /**
+         * 加锁 实现
+         */
 
         //加锁后
         barrier.reset();//重置CyclicBarrier
-        number = 0;
+        sum = 0;
         for (int i = 0; i < 30; i++) {
             new Thread(new Runnable() {
                 @Override
@@ -64,26 +74,27 @@ public class TestMutex {
             }).start();
         }
         barrier.await();
-        System.out.println("加锁后，number=" + number);
+        System.out.println("加锁后，sum=" + sum);
     }
 
     /**
      * 线程不安全 +1
      */
-    public static void increment1() {
+    private static void increment1() {
         //+1
-        number++;
+        sum++;
     }
 
     /**
      * 线程安全 +1
      */
-    public static void increment2() {
+    private static void increment2() {
         //加锁
-        mutex.lock();
+        myEasyLock.lock();
         //+1
-        number++;
+        sum++;
         //释放锁
-        mutex.unlock();
+        myEasyLock.unlock();
     }
+
 }
