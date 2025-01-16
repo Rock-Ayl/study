@@ -3,7 +3,7 @@ package com.rock.jdk.concurrent.lock.AQS;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 /**
- * AQS 实现一个简单的锁
+ * AQS 实现一个简单的 独占锁
  *
  * @Author ayl
  * @Date 2025-01-16
