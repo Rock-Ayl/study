@@ -1,4 +1,4 @@
-package com.rock.jdk.concurrent.lock.Condition使用的demo;
+package com.rock.jdk.concurrent.lock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,14 +7,14 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 启动模拟
+ * Condition_使用的demo
  * -
  * {@link java.util.concurrent.locks.Condition} 本质是 实现了 synchronized 的 wait + notify 的逻辑
  *
  * @Author ayl
  * @Date 2025-01-15
  */
-public class Start {
+public class Condition_使用的demo {
 
     /**
      * 仓库
