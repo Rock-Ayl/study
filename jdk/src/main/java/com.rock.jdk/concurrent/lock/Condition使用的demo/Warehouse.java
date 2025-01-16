@@ -18,7 +18,7 @@ public class Warehouse {
     private int size;
 
     //全局锁
-    private final Lock lock = new ReentrantLock();
+    private final Lock lock = new ReentrantLock(true);
 
     //条件组
     private final Condition notFull = this.lock.newCondition();
@@ -40,11 +40,11 @@ public class Warehouse {
      * @throws InterruptedException
      */
     public void put() throws InterruptedException {
-        //获取全局锁
-        this.lock.lock();
         try {
+            //获取全局锁
+            this.lock.lock();
             //如果仓库已满,等待直到有空间可用
-            while (this.size == this.maxSize) {
+            if (this.size == this.maxSize) {
                 //?
                 this.notFull.await();
             }
@@ -64,11 +64,11 @@ public class Warehouse {
      * @throws InterruptedException
      */
     public void take() throws InterruptedException {
-        //获取全局锁
-        this.lock.lock();
         try {
+            //获取全局锁
+            this.lock.lock();
             //如果仓库为空,等待直到有物品可用
-            while (this.size == 0) {
+            if (this.size == 0) {
                 //?
                 this.notEmpty.await();
             }
