@@ -10,15 +10,18 @@ public class Mutex {
 
     /**
      * 实现AQS
+     * -
+     * 状态枚举: [0=释放][1=锁定]
      */
     private static class Sync extends AbstractQueuedSynchronizer {
 
         /**
-         * 是否处于占用状态
+         * 是否处于锁定状态
          *
          * @return
          */
         protected boolean isHeldExclusively() {
+            //判断并返回
             return getState() == 1;
         }
 
@@ -31,6 +34,7 @@ public class Mutex {
         public boolean tryAcquire(int acquires) {
             //cas操作
             if (compareAndSetState(0, 1)) {
+                //记录成功锁定的线程
                 setExclusiveOwnerThread(Thread.currentThread());
                 //是
                 return true;
@@ -51,6 +55,7 @@ public class Mutex {
                 //抛出异常
                 throw new IllegalMonitorStateException();
             }
+            //取消锁定的线程
             setExclusiveOwnerThread(null);
             //设置状态
             setState(0);
@@ -87,7 +92,7 @@ public class Mutex {
     }
 
     /**
-     * 判断是否被获取锁了
+     * 是否处于锁定状态
      *
      * @return
      */
