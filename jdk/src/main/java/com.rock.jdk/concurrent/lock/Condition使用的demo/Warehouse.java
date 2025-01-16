@@ -20,8 +20,9 @@ public class Warehouse {
     //全局锁
     private final Lock lock = new ReentrantLock();
 
-    private final Condition notFull = lock.newCondition();
-    private final Condition notEmpty = lock.newCondition();
+    //条件组
+    private final Condition notFull = this.lock.newCondition();
+    private final Condition notEmpty = this.lock.newCondition();
 
     /**
      * 初始化仓库

@@ -11,7 +11,7 @@ public class Start {
     public static void main(String[] args) {
 
         //创建仓库
-        Warehouse warehouse = new Warehouse(5);
+        Warehouse warehouse = new Warehouse(3);
 
         //创建 生产者、消费者、线程，并绑定仓库
         Thread producerThread = new Thread(new Producer(warehouse), "生产者");
