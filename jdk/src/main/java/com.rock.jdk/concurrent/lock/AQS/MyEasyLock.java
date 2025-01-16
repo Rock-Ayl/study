@@ -1,4 +1,4 @@
-package com.rock.jdk.concurrent.lock.aqs;
+package com.rock.jdk.concurrent.lock.AQS;
 
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 

@@ -1,4 +1,4 @@
-package com.rock.jdk.concurrent.lock.aqs;
+package com.rock.jdk.concurrent.lock.AQS;
 
 import java.util.concurrent.CyclicBarrier;
 
@@ -40,7 +40,7 @@ public class Start {
                     //循环1万次
                     for (int i = 0; i < 10000; i++) {
                         //不安全+1
-                        increment1();
+                        unsafeIncr();
                     }
                     try {
                         //-1,等待其他线程结束
@@ -78,7 +78,7 @@ public class Start {
                     //循环1万次
                     for (int i = 0; i < 10000; i++) {
                         //安全+1
-                        increment2();
+                        safeIncr();
                     }
                     try {
                         //-1,等待其他线程结束
@@ -93,12 +93,13 @@ public class Start {
         barrier.await();
         //输出结果
         System.out.println("加锁后，sum=" + sum);
+
     }
 
     /**
      * 线程不安全 +1
      */
-    private static void increment1() {
+    private static void unsafeIncr() {
         //+1
         sum++;
     }
@@ -106,7 +107,7 @@ public class Start {
     /**
      * 线程安全 +1
      */
-    private static void increment2() {
+    private static void safeIncr() {
         //加锁
         myEasyLock.lock();
         //+1
