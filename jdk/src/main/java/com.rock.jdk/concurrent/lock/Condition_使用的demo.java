@@ -22,7 +22,7 @@ public class Condition_使用的demo {
      * @Author ayl
      * @Date 2025-01-15
      */
-    public static class Warehouse {
+    private static class Warehouse {
 
         //仓库最大库存数量
         private final int maxSize;

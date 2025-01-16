@@ -9,13 +9,13 @@ package com.rock.jdk.concurrent.lock;
  */
 public class synchronized_是可重入锁吗 {
 
-    public synchronized void method1() {
+    private synchronized void method1() {
         System.out.println("Inside method1");
         //这里再次调用一个同步方法
         method2();
     }
 
-    public synchronized void method2() {
+    private synchronized void method2() {
         System.out.println("Inside method2");
     }
 

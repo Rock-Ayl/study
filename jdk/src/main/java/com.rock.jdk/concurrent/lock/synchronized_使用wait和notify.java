@@ -13,7 +13,7 @@ public class synchronized_使用wait和notify {
     /**
      * 任务仓库
      */
-    public static class TaskQueue {
+    private static class TaskQueue {
 
         //任务队列
         private Queue<String> queue = new LinkedList<>();
