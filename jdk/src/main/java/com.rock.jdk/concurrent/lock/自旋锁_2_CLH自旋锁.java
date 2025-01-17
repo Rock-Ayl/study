@@ -86,6 +86,11 @@ public class 自旋锁_2_CLH自旋锁 {
         while (preNode.locked == true) {
             //没有获取到锁
             System.out.println("线程[" + Thread.currentThread().getName() + "]没能获取到锁，进行自旋等待。。。");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         /**
@@ -106,7 +111,7 @@ public class 自旋锁_2_CLH自旋锁 {
          */
 
         //获取当前线程节点
-        CLHNode node = curNode.get();
+        CLHNode node = this.curNode.get();
         //修改状态为 已释放锁
         node.locked = false;
 
@@ -118,7 +123,7 @@ public class 自旋锁_2_CLH自旋锁 {
 
         /**
          * 后续处理
-         * 1. 这么做，能防止该线程再次获取锁陷入 [无限自旋] 中
+         * 1. 这么做，能防止该线程再次获取锁陷入 [无限自旋] 中（线程数量=1时候可以清晰看到）
          * 2. 能提高GC效率、节省内存空间
          */
 
@@ -145,7 +150,7 @@ public class 自旋锁_2_CLH自旋锁 {
          */
 
         //线程数
-        int threadSize = 10;
+        int threadSize = 1;
         //自增总和
         int size = 5 * threadSize;
 
