@@ -143,8 +143,10 @@ public class 自旋锁_2_CLH自旋锁 {
          * 通过修改配置 控制用例数量
          */
 
-        //线程、自增数
-        int size = 100;
+        //线程数
+        int threadSize = 10;
+        //自增总和
+        int size = 5 * threadSize;
 
         /**
          * 实现自增 (不加锁会导致没有原子性)
@@ -153,20 +155,23 @@ public class 自旋锁_2_CLH自旋锁 {
         //初始化 CLH自旋锁
         自旋锁_2_CLH自旋锁 lock = new 自旋锁_2_CLH自旋锁();
         //计数器
-        CountDownLatch countDownLatch = new CountDownLatch(size);
+        CountDownLatch countDownLatch = new CountDownLatch(threadSize);
         //线程数组
         List<Thread> threadList = new ArrayList<>();
         //循环
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < threadSize; i++) {
             //初始化线程，组装到数组
             threadList.add(new Thread(() -> {
-                //获取锁
-                lock.lock();
-                //+1
-                count++;
-                //释放锁
-                lock.unLock();
-                //完成，计数器-1
+                //每个线程都执行多次自增操作
+                for (int j = 0; j < size / threadSize; j++) {
+                    //获取锁
+                    lock.lock();
+                    //+1
+                    count++;
+                    //释放锁
+                    lock.unLock();
+                }
+                //最终完成后，计数器-1
                 countDownLatch.countDown();
             }, String.valueOf(i)));
         }
