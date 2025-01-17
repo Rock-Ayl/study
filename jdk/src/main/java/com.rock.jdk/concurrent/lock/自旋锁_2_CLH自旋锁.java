@@ -85,7 +85,7 @@ public class 自旋锁_2_CLH自旋锁 {
         //自旋,失败就继续，成功则跳出
         while (preNode.locked == true) {
             //没有获取到锁
-            System.out.println("线程" + Thread.currentThread().getName() + "没能获取到锁，进行自旋等待。。。");
+            System.out.println("线程[" + Thread.currentThread().getName() + "]没能获取到锁，进行自旋等待。。。");
         }
 
         /**
@@ -93,7 +93,7 @@ public class 自旋锁_2_CLH自旋锁 {
          */
 
         //获取到锁
-        System.out.println("线程" + Thread.currentThread().getName() + "获取到了锁！！！");
+        System.out.println("线程[" + Thread.currentThread().getName() + "]获取到了锁！！！");
     }
 
     /**
@@ -114,7 +114,7 @@ public class 自旋锁_2_CLH自旋锁 {
          * 到了这里，该节点已经 释放了锁，其下一个节点应该获取到了锁了
          */
 
-        System.out.println("线程" + Thread.currentThread().getName() + "释放了锁！！！");
+        System.out.println("线程[" + Thread.currentThread().getName() + "]释放了锁！！！");
 
         /**
          * 后续处理
@@ -122,7 +122,8 @@ public class 自旋锁_2_CLH自旋锁 {
          * 2. 能提高GC效率、节省内存空间
          */
 
-        //普通处理办法,可以达成 1 this.curNode.set(new CLHNode());
+        //普通处理办法,可以达成 1
+        //this.curNode.set(new CLHNode());
 
         //优化处理办法，达成 1 + 2
         this.curNode.set(this.predNode.get());
