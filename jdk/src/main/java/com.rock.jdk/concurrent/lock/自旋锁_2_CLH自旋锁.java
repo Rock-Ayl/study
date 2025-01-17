@@ -19,9 +19,10 @@ public class 自旋锁_2_CLH自旋锁 {
     private static class CLHNode {
 
         /**
-         * 该节点是否获取到锁,默认false
+         * true = 自旋获取锁中 or 持有锁中
+         * false = 未开始获取锁 or 已释放锁
          * -
-         * volatile 修饰保证多线程可见性
+         * volatile = 修饰保证多线程可见性
          */
         volatile boolean locked = false;
 
@@ -46,8 +47,11 @@ public class 自旋锁_2_CLH自旋锁 {
      * 初始化
      */
     public 自旋锁_2_CLH自旋锁() {
+        //全局引用
         this.tailNode = new AtomicReference<>(new CLHNode());
+        //初始化，每个线程都初始化自己的节点
         this.curNode = ThreadLocal.withInitial(CLHNode::new);
+        //初始化，每个线程都不会有前置节点
         this.predNode = new ThreadLocal<>();
     }
 
@@ -55,26 +59,40 @@ public class 自旋锁_2_CLH自旋锁 {
      * 获取锁
      */
     public void lock() {
-        // 取出当前线程ThreadLocal存储的当前节点，初始化值总是一个新建的CLHNode，locked状态为false。
-        CLHNode currNode = curNode.get();
-        // 此时把lock状态置为true，表示一个有效状态，
-        // 即获取到了锁或正在等待锁的状态
+
+        /**
+         * 获取当前节点、修改状态
+         */
+
+        //获取当前线程的当前节点
+        CLHNode currNode = this.curNode.get();
+        //修改为 获取锁中 or 已获取到锁，之后就不改了
         currNode.locked = true;
-        // 当一个线程到来时，总是将尾结点取出来赋值给当前线程的前继节点；
-        // 然后再把当前线程的当前节点赋值给尾节点
-        // 【注意】在多线程并发情况下，这里通过AtomicReference类能防止并发问题
-        // 【注意】哪个线程先执行到这里就会先执行predNode.set(preNode);语句，因此构建了一条逻辑线程等待链
-        // 这条链避免了线程饥饿现象发生
-        CLHNode preNode = tailNode.getAndSet(currNode);
-        // 将刚获取的尾结点（前一线程的当前节点）付给当前线程的前继节点ThreadLocal
-        // 【思考】这句代码也可以去掉吗，如果去掉有影响吗？
-        predNode.set(preNode);
-        // 【1】若前继节点的locked状态为false，则表示获取到了锁，不用自旋等待；
-        // 【2】若前继节点的locked状态为true，则表示前一线程获取到了锁或者正在等待，自旋等待
-        while (preNode.locked) {
+
+        /**
+         * 将当前节点插入到链表尾部
+         */
+
+        //获取前置节点，并修改当前节点为最后一个节点
+        CLHNode preNode = this.tailNode.getAndSet(currNode);
+        //记录其前置节点
+        this.predNode.set(preNode);
+
+        /**
+         * 自旋获取锁，如果前一个节点 还是true 说明前一个节点还没有：释放锁 or 获取到锁
+         */
+
+        //自旋,失败就继续，成功则跳出
+        while (preNode.locked == true) {
+            //没有获取到锁
             System.out.println("线程" + Thread.currentThread().getName() + "没能获取到锁，进行自旋等待。。。");
         }
-        // 能执行到这里，说明当前线程获取到了锁
+
+        /**
+         * 到了这里，说明前一个节点 locked == false 了，该节点视为获取到锁
+         */
+
+        //获取到锁
         System.out.println("线程" + Thread.currentThread().getName() + "获取到了锁！！！");
     }
 
@@ -82,19 +100,33 @@ public class 自旋锁_2_CLH自旋锁 {
      * 释放锁
      */
     public void unLock() {
-        // 获取当前线程的当前节点
+
+        /**
+         * 获取当前节点、修改状态
+         */
+
+        //获取当前线程节点
         CLHNode node = curNode.get();
-        // 进行解锁操作
-        // 这里将locked至为false，此时执行了lock方法正在自旋等待的后继节点将会获取到锁
-        // 【注意】而不是所有正在自旋等待的线程去并发竞争锁
+        //修改状态为 已释放锁
         node.locked = false;
+
+        /**
+         * 到了这里，该节点已经 释放了锁，其下一个节点应该获取到了锁了
+         */
+
         System.out.println("线程" + Thread.currentThread().getName() + "释放了锁！！！");
+
+        /**
+         * 后续处理
+         */
+
         // 小伙伴们可以思考下，下面两句代码的作用是什么？？
         CLHNode newCurNode = new CLHNode();
         curNode.set(newCurNode);
 
         // 【优化】能提高GC效率和节省内存空间，请思考：这是为什么？
         // curNode.set(predNode.get());
+
     }
 
     //自增数字对象
@@ -136,8 +168,13 @@ public class 自旋锁_2_CLH自旋锁 {
                 lock.unLock();
                 //完成，计数器-1
                 countDownLatch.countDown();
-            }));
+            }, String.valueOf(i)));
         }
+
+        /**
+         * 统一启动线程、结束后输出
+         */
+
         //循环
         for (Thread thread : threadList) {
             //统一启动
