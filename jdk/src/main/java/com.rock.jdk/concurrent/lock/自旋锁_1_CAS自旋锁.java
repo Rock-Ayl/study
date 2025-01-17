@@ -4,12 +4,12 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * cas 自旋锁 乐观锁
+ * CAS 自旋锁 乐观锁
  *
  * @Author ayl
  * @Date 2025-01-17
  */
-public class 自旋锁_CAS自旋锁 {
+public class 自旋锁_1_CAS自旋锁 {
 
     //并发包-原子类,默认值=5
     private AtomicInteger number = new AtomicInteger(0);
@@ -22,6 +22,11 @@ public class 自旋锁_CAS自旋锁 {
         int oldNumber = number.get();
         //计算新数字
         int newNumber = oldNumber + 1;
+
+        /**
+         * 核心逻辑,如果失败,就死循环再来
+         */
+
         //cas自旋，不断尝试，失败则继续尝试
         while (this.number.compareAndSet(oldNumber, newNumber) == false) {
             //重新获取旧数字
@@ -37,7 +42,7 @@ public class 自旋锁_CAS自旋锁 {
         //目标线程数、以及自增数量
         int size = 100;
         //初始化
-        自旋锁_CAS自旋锁 自旋锁_cas自旋锁 = new 自旋锁_CAS自旋锁();
+        自旋锁_1_CAS自旋锁 自旋锁_cas自旋锁 = new 自旋锁_1_CAS自旋锁();
         //计数器
         CountDownLatch countDownLatch = new CountDownLatch(size);
         //循环
