@@ -118,14 +118,14 @@ public class 自旋锁_2_CLH自旋锁 {
 
         /**
          * 后续处理
+         * 1. 这么做，能防止该线程再次获取锁陷入自旋中
+         * 2. 能提高GC效率、节省内存空间
          */
 
-        // 小伙伴们可以思考下，下面两句代码的作用是什么？？
-        CLHNode newCurNode = new CLHNode();
-        curNode.set(newCurNode);
+        //普通处理办法,可以达成 1 this.curNode.set(new CLHNode());
 
-        // 【优化】能提高GC效率和节省内存空间，请思考：这是为什么？
-        // curNode.set(predNode.get());
+        //优化处理办法，达成 1 + 2
+        this.curNode.set(this.predNode.get());
 
     }
 
