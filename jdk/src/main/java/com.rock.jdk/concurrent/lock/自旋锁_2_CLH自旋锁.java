@@ -18,28 +18,37 @@ public class 自旋锁_2_CLH自旋锁 {
      */
     private static class CLHNode {
 
-        // 锁状态：默认为false，表示线程没有获取到锁；true表示线程获取到锁或正在等待
-        // 为了保证locked状态是线程间可见的，因此用volatile关键字修饰
+        /**
+         * 该节点是否获取到锁,默认false
+         * -
+         * volatile 修饰保证多线程可见性
+         */
         volatile boolean locked = false;
 
     }
 
-    // 尾结点，总是指向最后一个CLHNode节点
-    // 【注意】这里用了java的原子系列之AtomicReference，能保证原子更新
+    /**
+     * 引用、模拟 链表的最后一个节点
+     */
     private final AtomicReference<CLHNode> tailNode;
-    // 当前节点的前继节点
+
+    /**
+     * 当前线程节点的上一个节点
+     */
     private final ThreadLocal<CLHNode> predNode;
-    // 当前节点
+
+    /**
+     * 当前线程的节点
+     */
     private final ThreadLocal<CLHNode> curNode;
 
-    // CLHLock构造函数，用于新建CLH锁节点时做一些初始化逻辑
+    /**
+     * 初始化
+     */
     public 自旋锁_2_CLH自旋锁() {
-        // 初始化时尾结点指向一个空的CLH节点
         this.tailNode = new AtomicReference<>(new CLHNode());
-        // 初始化当前的CLH节点
         this.curNode = ThreadLocal.withInitial(CLHNode::new);
-        // 初始化前继节点，注意此时前继节点没有存储CLHNode对象，存储的是null
-        this.predNode = new ThreadLocal();
+        this.predNode = new ThreadLocal<>();
     }
 
     /**
