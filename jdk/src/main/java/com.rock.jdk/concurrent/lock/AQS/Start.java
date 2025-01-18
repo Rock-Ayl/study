@@ -10,8 +10,8 @@ import java.util.concurrent.CountDownLatch;
  */
 public class Start {
 
-    //初始化 简单的锁
-    private static MyEasyLock myEasyLock = new MyEasyLock();
+    //初始化 不可重入锁
+    private static AQS实现_不可重入锁 lock = new AQS实现_不可重入锁();
 
     //计数器
     private static CountDownLatch countDownLatch = new CountDownLatch(30);
@@ -109,11 +109,11 @@ public class Start {
      */
     private static void safeIncr() {
         //加锁
-        myEasyLock.lock();
+        lock.lock();
         //+1
         sum++;
         //释放锁
-        myEasyLock.unlock();
+        lock.unlock();
     }
 
 }

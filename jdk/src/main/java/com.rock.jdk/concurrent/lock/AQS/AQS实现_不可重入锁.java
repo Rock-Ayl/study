@@ -8,7 +8,7 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  * @Author ayl
  * @Date 2025-01-16
  */
-public class MyEasyLock {
+public class AQS实现_不可重入锁 {
 
     /**
      * 实现AQS
