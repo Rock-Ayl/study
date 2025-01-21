@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class Test {
 
+    //返回结果节点
     private static class Node {
 
         //x
@@ -31,6 +32,7 @@ public class Test {
 
         @Override
         public int hashCode() {
+            //计算hash
             return Integer.valueOf(this.x.add(this.y).add(this.z).toBigInteger().toString());
         }
 
@@ -38,7 +40,10 @@ public class Test {
         public boolean equals(Object obj) {
             //强转
             Node another = (Node) obj;
-            return super.equals(obj);
+            //返回
+            return this.x.compareTo(another.x) == 0 &&
+                    this.y.compareTo(another.y) == 0 &&
+                    this.z.compareTo(another.z) == 0;
         }
 
     }
@@ -76,9 +81,9 @@ public class Test {
         List<BigDecimal[]> solutions = new ArrayList<>();
         //每次叠加
         BigDecimal step = new BigDecimal("0.00001");
-        //每个字段最大
+        //x、y、z的最大值
         BigDecimal one = BigDecimal.ONE;
-        //误差
+        //结果误差
         BigDecimal tolerance = new BigDecimal("0.00001");
         //循环1
         for (BigDecimal x = new BigDecimal("0.1"); x.compareTo(one) <= 0; x = x.add(step)) {
@@ -95,17 +100,20 @@ public class Test {
                 BigDecimal rightSide = D.setScale(2, RoundingMode.HALF_UP);
                 //如果满足
                 if (leftSide.subtract(rightSide).abs().compareTo(tolerance) < 0) {
+                    //记录结果
                     solutions.add(new BigDecimal[]{
                             x.setScale(2, RoundingMode.HALF_UP),
                             y.setScale(2, RoundingMode.HALF_UP),
                             z.setScale(2, RoundingMode.HALF_UP)});
+                    //如果结果够了
                     if (solutions.size() >= 50) {
+                        //结束
                         return solutions;
                     }
                 }
             }
         }
-
+        //放回结果列表
         return solutions;
     }
 
