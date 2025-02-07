@@ -8,9 +8,12 @@ package com.rock.dubbo.spi.dubbo;
  */
 public class TwoImpl implements Service {
 
+    //时间戳
+    private long time = System.currentTimeMillis();
+
     @Override
     public void hello() {
-        System.out.println("dubbo 服务实现2");
+        System.out.println("dubbo 服务实现2," + this.time);
     }
 
 }

@@ -23,6 +23,8 @@ public class Starter {
         extensionLoader.getExtension("dubboSpiKey1").hello();
         extensionLoader.getExtension("dubboSpiKey1").hello();
         extensionLoader.getExtension("dubboSpiKey1").hello();
+        extensionLoader.getExtension("dubboSpiKey2").hello();
+        extensionLoader.getExtension("dubboSpiKey2").hello();
 
     }
 
