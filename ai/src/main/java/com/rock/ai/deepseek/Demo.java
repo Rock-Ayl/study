@@ -50,21 +50,52 @@ public class Demo {
          * 普通 V3 模型 请求
          */
 
+        //请求
+        String body = deepSeekPost(requestBody);
+        //输出结果
+        System.out.println("============== 普通 V3 模型 输出结果 ===============");
+        System.out.println(body);
+        System.out.println("============== 普通 V3 模型 输出结束 ===============");
+
+        /**
+         * R1 推理模型 构建参数
+         */
+
+        //更换模型
+        requestBody.setModel("deepseek-reasoner");
+
+        /**
+         * R1 推理模型 请求
+         */
+
+        //请求
+        String body2 = deepSeekPost(requestBody);
+        //输出结果
+        System.out.println("============== R1 推理模型 输出结果 ===============");
+        System.out.println(body2);
+        System.out.println("============== R1 推理模型 输出结束 ===============");
+
+    }
+
+    /**
+     * 请求 deepSeek 封装
+     *
+     * @param requestBody 参数体
+     * @return
+     */
+    private static String deepSeekPost(DeepSeekRequestBody requestBody) {
         //组装请求
         HttpResponse response = HttpRequest.post(DEEP_SEEK_POST_URL)
                 //参数类型
                 .header("Content-Type", "application/json")
                 //api key
-                .header("Authorization", "Bearer " + API_KEY)
+                .header("Authorization", String.format("Bearer %s", API_KEY))
                 //参数体
                 .body(FastJsonExtraUtils.toJSONString(requestBody))
                 //请求实现
                 .execute();
         //获取返回内容
-        String body = response.body();
-        //输出结果
-        System.out.println(body);
-
+        return response.body();
     }
 
 }
