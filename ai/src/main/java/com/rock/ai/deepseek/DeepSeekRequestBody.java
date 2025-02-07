@@ -17,8 +17,8 @@ public class DeepSeekRequestBody {
 
     //todo 还有很多选填参数
 
-    //模型[deepseek-chat][deepseek-reasoner]
-    private String model = "deepseek-chat";
+    //模型[普通模型=deepseek-chat][推理模型=deepseek-reasoner]
+    private String model;
 
     //是否为流式返回
     private Boolean stream;
