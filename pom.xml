@@ -18,6 +18,9 @@
         <!-- 学习jdk源码 -->
         <module>jdk</module>
 
+        <!-- 学习AI -->
+        <module>ai</module>
+
     </modules>
 
 </project>
