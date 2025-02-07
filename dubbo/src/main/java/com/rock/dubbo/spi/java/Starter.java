@@ -16,6 +16,8 @@ public class Starter {
         ServiceLoader<Service> serviceLoader = ServiceLoader.load(Service.class);
         //这里会做初始化，并执行方法
         serviceLoader.forEach(Service::hello);
+        //再度执行,发现时间戳一样,用的是缓存类
+        serviceLoader.forEach(Service::hello);
     }
 
 }
