@@ -5,7 +5,9 @@ import javassist.CtClass;
 import javassist.CtMethod;
 
 /**
- * javassist 拼接一个类,通过反射初始化实例、调用方法
+ * javassist：开源、动态代理、AOP框架
+ * -
+ * 拼接一个类,通过反射初始化实例、调用方法
  *
  * @Author ayl
  * @Date 2025-01-01
