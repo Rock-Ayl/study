@@ -27,7 +27,7 @@
 
     <dependencies>
 
-        <!-- javassist -->
+        <!-- javassist 开源、动态代理、AOP框架 -->
         <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
