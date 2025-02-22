@@ -3,15 +3,16 @@ package com.rock.jdk.proxy.cglib_动态代理;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 /**
- * 自定义 MethodInterceptor (方法拦截器)
+ * 实现 cgLib 的 {@link InvocationHandler} (方法拦截器)
  *
  * @Author ayl
  * @Date 2025-02-22
  */
-public class DebugMethodInterceptor implements MethodInterceptor {
+public class CglibDebugMethodInterceptor implements MethodInterceptor {
 
     /**
      * 实现功能的定义

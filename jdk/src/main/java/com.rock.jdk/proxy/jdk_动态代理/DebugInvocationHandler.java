@@ -5,7 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * 定义 jdk 动态代理类
+ * 定义 jdk 动态代理类 (方法拦截器)
  *
  * @Author ayl
  * @Date 2025-02-22
