@@ -1,7 +1,7 @@
 package com.rock.jdk.proxy.jdk_静态代理;
 
 /**
- * 启动静态代理调用
+ * 调用 jdk 静态代理
  *
  * @Author ayl
  * @Date 2025-02-22

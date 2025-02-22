@@ -11,13 +11,13 @@ import java.lang.reflect.Proxy;
 public class JdkProxyFactory {
 
     /**
-     * 工厂构造被代理的对象的统一方法
+     * 构造代理对象(不是被代理的对象)
      *
      * @param target
      * @return
      */
     public static Object getProxy(Object target) {
-        //根据对象信息、构造对象实例
+        //根据对象信息、构造代理对象
         return Proxy.newProxyInstance(
                 //指定目标类的类加载器
                 target.getClass().getClassLoader(),
