@@ -24,6 +24,9 @@ public class DebugInvocationHandler implements InvocationHandler {
         this.target = target;
     }
 
+    /**
+     * 实现功能的定义
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws InvocationTargetException, IllegalAccessException {
         //调用前
