@@ -20,6 +20,7 @@
 
         <!-- 学习AI -->
         <module>ai</module>
+        <module>api</module>
 
     </modules>
 
